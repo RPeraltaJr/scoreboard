@@ -1,7 +1,7 @@
 import React from 'react'
 import Counter from './Counter'
 
-export default function Player({ id, name, removePlayer }) {
+export default function Player({ id, name, removePlayer, score, changeScore }) {
     
     return (
         <div className="player">
@@ -10,7 +10,7 @@ export default function Player({ id, name, removePlayer }) {
                 { name }
             </span>
 
-            <Counter />
+            <Counter score={score} id={id} changeScore={changeScore} />
         </div>
     )
 }
