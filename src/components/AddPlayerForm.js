@@ -1,26 +1,24 @@
-import React, { useState } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import './AddPlayerForm.scss'
 
 export default function AddPlayerForm({ addPlayer }) {
 
-    const [ value, setValue ] = useState('');
-
-    const handleValueChange = (e) => {
-        setValue(e.target.value);
-    }
+    // with refs, render is called only once
+    const playerInput = React.createRef();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addPlayer(value); // call to prop method
-        setValue('');
+        
+        addPlayer(playerInput.current.value); // call to prop method
+        e.currentTarget.reset();
     }
 
     return (
         <form onSubmit={handleSubmit}>
             <input 
                 type="text" 
-                value={value}
-                onChange={handleValueChange}
+                ref={playerInput}
                 placeholder="Enter a player's name" 
             />
             <input
@@ -29,4 +27,8 @@ export default function AddPlayerForm({ addPlayer }) {
             />
         </form>
     )
+}
+
+AddPlayerForm.propTypes = {
+    addPlayer: PropTypes.func.isRequired,
 }

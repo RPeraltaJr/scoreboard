@@ -8,6 +8,7 @@ export default function App() {
   
   const [ players, setPlayers ] = useState([]);
 
+  // * Fetch users
   useEffect(() => { 
     async function fetchData() {
       const response = await fetch('https://jsonplaceholder.typicode.com/users/');
@@ -22,6 +23,7 @@ export default function App() {
     fetchData();
   }, []);
 
+  // * Score change
   const handleScoreChange = (id, delta) => {
     setPlayers(players.map(player => {
       // find player
@@ -38,6 +40,7 @@ export default function App() {
     // console.log(id, delta);
   }
 
+  // * Add player
   const handleAddPlayer = (name) => {
     let newPlayer = {
       id: players.slice(-1)[0].id + 1, // get id value of last element in array and then add 1
@@ -47,15 +50,28 @@ export default function App() {
     setPlayers([...players, newPlayer]);
   }
 
+  // * Remove player
   const handleRemovePlayer = (id) => {
     // return all players where player.id does not equal passed id
     setPlayers(players.filter(player => player.id !== id)); 
   }
 
+  // * High score
+  const getHighScore = () => {
+    const scores = players.map( player => player.score );
+    const highScore = Math.max(...scores);
+    if (highScore) {
+      return highScore;
+    } 
+    return null;
+  }
+  const highScore = getHighScore();
+
+
   return (
     <div className="scoreboard">
 
-      <Header title="Scoreboard" players={players} />
+      <Header players={players} />
 
       {/* Players list */}
       {players.map( player =>
@@ -65,7 +81,8 @@ export default function App() {
           id={player.id}
           key={player.id.toString()} 
           removePlayer={handleRemovePlayer} 
-          changeScore={handleScoreChange}          
+          changeScore={handleScoreChange} 
+          isHighScore={highScore === player.score}
         />
       )}
 

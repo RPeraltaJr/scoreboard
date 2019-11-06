@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export default function Counter({ id, score, changeScore }) {
 
@@ -11,4 +12,10 @@ export default function Counter({ id, score, changeScore }) {
         </div>
     );
 
+}
+
+Counter.propTypes = {
+    id: PropTypes.number.isRequired,
+    score: PropTypes.number.isRequired,
+    changeScore: PropTypes.func.isRequired,
 }
