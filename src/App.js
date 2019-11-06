@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Header from './components/Header'
 import Player from './components/Player'
+import AddPlayerForm from './components/AddPlayerForm'
 import './App.scss'
 
 export default function App() {
@@ -11,7 +12,10 @@ export default function App() {
     async function fetchData() {
       const response = await fetch('https://jsonplaceholder.typicode.com/users/');
       const result = await response.json();
-      result.map(player => { player.score = 0; }); // add custom property of score to each player
+      result.map(player => { 
+        player.score = 0; // add custom property of score to each player
+        return player; 
+      }); 
       setPlayers(result);
       // console.log(result);
     }
@@ -21,7 +25,7 @@ export default function App() {
   const handleScoreChange = (id, delta) => {
     setPlayers(players.map(player => {
       // find player
-      if( player.id == id ) { 
+      if( player.id === id ) { 
         // stop numbers from being negative
         if ( player.score === 0 && Math.sign(delta) === -1 ) { 
             player.score = 0;
@@ -32,6 +36,15 @@ export default function App() {
       return player;
     }));
     // console.log(id, delta);
+  }
+
+  const handleAddPlayer = (name) => {
+    let newPlayer = {
+      id: players.slice(-1)[0].id + 1, // get id value of last element in array and then add 1
+      name,
+      score: 0,
+    }
+    setPlayers([...players, newPlayer]);
   }
 
   const handleRemovePlayer = (id) => {
@@ -55,6 +68,8 @@ export default function App() {
           changeScore={handleScoreChange}          
         />
       )}
+
+      <AddPlayerForm addPlayer={handleAddPlayer} />
 
     </div>
   );
