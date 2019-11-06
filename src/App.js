@@ -42,7 +42,7 @@ export default function App() {
   return (
     <div className="scoreboard">
 
-      <Header title="Scoreboard" totalPlayers={players.length} />
+      <Header title="Scoreboard" players={players} />
 
       {/* Players list */}
       {players.map( player =>
