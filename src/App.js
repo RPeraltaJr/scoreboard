@@ -58,8 +58,8 @@ export default function App() {
 
   // * High score
   const getHighScore = () => {
-    const scores = players.map( player => player.score );
-    const highScore = Math.max(...scores);
+    const scores = players.map( player => player.score ); // get all player scores
+    const highScore = Math.max(...scores); // get max score value
     if (highScore) {
       return highScore;
     } 
