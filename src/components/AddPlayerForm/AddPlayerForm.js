@@ -9,7 +9,6 @@ export default function AddPlayerForm({ addPlayer }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
         addPlayer(playerInput.current.value); // call to prop method
         e.currentTarget.reset();
     }

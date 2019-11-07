@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Counter from './Counter'
-import Icon from './Icon'
+import Counter from './Counter/Counter'
+import Icon from './Icon/Icon'
 
 export default function Player({ id, name, removePlayer, score, changeScore, isHighScore }) {
     

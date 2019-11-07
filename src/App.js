@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import Header from './components/Header'
-import Player from './components/Player'
-import AddPlayerForm from './components/AddPlayerForm'
+import Header from './components/Header/Header'
+import Player from './components/Player/Player'
+import AddPlayerForm from './components/AddPlayerForm/AddPlayerForm'
+import Alert from './components/Alert/Alert'
 import './App.scss'
 
 export default function App() {
   
   const [ players, setPlayers ] = useState([]);
+  const [ alert, setAlert ] = useState(null);
 
   // * Fetch users
   useEffect(() => { 
@@ -40,14 +42,38 @@ export default function App() {
     // console.log(id, delta);
   }
 
+  const validateAddPlayer = (name) => {
+    // empty string
+    if( name.trim() === '' ) {
+      setAlert('Enter a player\'s name.');
+      return false;
+    }
+    // TODO: length
+    // if( name.length  ) {
+    //   setAlert('Player\'s name must be at least 3 characters long.');
+    //   return false;
+    // }
+    // regex
+    let nameRegex =  /^[a-z\s]+$/i;
+    if( !nameRegex.test(name) ) {
+      setAlert('Only alphanumeric characters or spaces allowed.');
+      return false;
+    }
+    return;
+  }
+
   // * Add player
   const handleAddPlayer = (name) => {
-    let newPlayer = {
-      id: players.slice(-1)[0].id + 1, // get id value of last element in array and then add 1
-      name,
-      score: 0,
+    validateAddPlayer(name);
+    if( validateAddPlayer === true ) {
+      let newPlayer = {
+        id: players.slice(-1)[0].id + 1, // get id value of last element in array and then add 1
+        name,
+        score: 0,
+      }
+      setPlayers([...players, newPlayer]);
+      setAlert(null);
     }
-    setPlayers([...players, newPlayer]);
   }
 
   // * Remove player
@@ -86,6 +112,7 @@ export default function App() {
         />
       )}
 
+      <Alert alert={alert} />
       <AddPlayerForm addPlayer={handleAddPlayer} />
 
     </div>
