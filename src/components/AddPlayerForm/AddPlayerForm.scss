@@ -1,6 +1,6 @@
 form {
     display: flex;
-    background-color: #8063FA;
+    background-color: #2196f3;
 }
 
 input[type=text] {
@@ -9,22 +9,22 @@ input[type=text] {
     margin: 15px 10px 15px 15px;
     padding: 10px;
     border-radius: 5px;
-    background-color: #5B45B9;
+    background-color: #0d47a1;
     border-style: none;
     text-shadow: none;
     text-transform: uppercase;
-    color: #C7BCF8;
+    color: #bbdefb;
     letter-spacing: 2px;
     outline: none;
 }
 
 input[type=text]::-webkit-input-placeholder{
-    color: #C7BCF8;
+    color: #bbdefb;
     letter-spacing: 2px;
 }
 
 input[type=text]:focus{
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #1565c0;
 }
 
 input[type=submit] {
@@ -32,7 +32,7 @@ input[type=submit] {
     font-size: .6em;
     margin: 15px 15px 15px 0; 
     padding: 10px;
-    background-color: #44338D;
+    background-color: #0d47a1;
     border-radius: 5px;
     border: none;
     color: #fff;
