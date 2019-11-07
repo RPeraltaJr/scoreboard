@@ -1,5 +1,7 @@
 # Scoreboard
 
+A scoreboard app using React 16.11.0
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
